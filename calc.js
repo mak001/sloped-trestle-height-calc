@@ -53,13 +53,15 @@ const drawSupportingLines = (num) => {
     console.log(supportPos, supportHeight, x);
 
     ctx.beginPath();
-    ctx.strokeStyle = i % 2 === 0 ? getCSSVar("--color-primary") : getCSSVar("--color-accent");
+    ctx.strokeStyle =
+      i % 2 === 0 ? getCSSVar("--color-primary") : getCSSVar("--color-accent");
     ctx.moveTo(x, 60);
     ctx.lineTo(x, y);
     ctx.stroke();
 
     // draw the label
-    ctx.fillStyle = i % 2 === 0 ? getCSSVar("--color-primary") : getCSSVar("--color-accent");
+    ctx.fillStyle =
+      i % 2 === 0 ? getCSSVar("--color-primary") : getCSSVar("--color-accent");
     ctx.fillText(supports.length - i, x, 80);
   }
 };
@@ -73,8 +75,8 @@ const calculateSupportingLines = (supportCount, length, slopeAngle) => {
   const supports = [];
   for (let i = 1; i < supportCount + 1; i++) {
     const supportPos = i * supportDistance;
-    const supportHeight = (length - (i * supportDistance)) * Math.tan(slopeAngle);
-    supports.push({supportPos, supportHeight});
+    const supportHeight = (length - i * supportDistance) * Math.tan(slopeAngle);
+    supports.push({ supportPos, supportHeight });
   }
   return supports;
 };
@@ -88,14 +90,14 @@ const calculate = (form) => {
   const endingHeight = parseFloat(form.elements["endingHeight"].value);
   const length = endingHeight / Math.tan(slopeAngle);
 
-  const  numSupports = parseInt(form.elements["numSupports"].value);
+  const numSupports = parseInt(form.elements["numSupports"].value);
 
   const maxDistance = parseFloat(form.elements["maxDistance"].value);
-  
+
   let supportCount = numSupports;
   let usedMaxDistance = false;
-  
-  if (!numSupports || (maxDistance && (length / numSupports) > maxDistance)) {
+
+  if (!numSupports || (maxDistance && length / numSupports > maxDistance)) {
     supportCount = Math.ceil(length / maxDistance) - 1;
     usedMaxDistance = true;
   }
@@ -112,14 +114,14 @@ const calculate = (form) => {
     supportDistance,
     supports,
     usedMaxDistance,
-  }
+  };
   console.log(output);
   return output;
 };
 
 const fillResultTable = (data) => {
   document.getElementById("tableEndingHeight").innerText = data.endingHeight;
-  document.getElementById("tableSupportDistance").innerHTML = 
+  document.getElementById("tableSupportDistance").innerHTML =
     `${data.supportDistance.toFixed(2)}<span class="tooltiptext">${data.supportDistance}</span>`;
   document.getElementById("tableNumSupports").innerText = data.supportCount;
   document.getElementById("tableSlopeLength").innerText = data.length;
@@ -142,18 +144,46 @@ const render = () => {
   drawTriangle();
   drawSupportingLines(data.supportCount);
   fillResultTable(data);
-}
+};
+
+const updateURLParams = (form) => {
+  const params = new URLSearchParams(window.location.search);
+  for (const [key, value] of new FormData(form)) {
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+  }
+  window.history.pushState({}, "", `${window.location.pathname}?${params}`);
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   drawTriangle();
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
+
+  let loadedParam = false;
+  for (const [key, value] of params.entries()) {
+    const input = document.querySelector(`input[name="${key}"]`);
+    if (input) {
+      input.value = value;
+      loadedParam = true;
+    }
+  }
+
+  if (loadedParam) {
+    data = calculate(document.querySelector("form"));
+    render();
+  }
 
   document.addEventListener("submit", (event) => {
     event.preventDefault();
+    updateURLParams(event.target);
     data = calculate(event.target);
     render();
   });
 
-  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  darkModeMediaQuery.addEventListener('change', render);
+  const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  darkModeMediaQuery.addEventListener("change", render);
 });
- 

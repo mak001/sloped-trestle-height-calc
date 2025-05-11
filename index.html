@@ -1,71 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slope Grade Calculator</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Slope Grade Hieght Calculator</h1>
-  <section>
-    <form id="slopeForm">
-      <div class="form-grid">
-        <div>
-          <label for="slopePercent">Slope (%)</label>
-          <input type="number" id="slopePercent" name="slopePercent" step="0.1" min="0.1" required>
-        </div>
-        <div>
-          <label for="endingHeight">Ending Height</label>
-          <input type="number" id="endingHeight" name="endingHeight" step="0.01" min="0.01" required>
-        </div>
-        <div>
-          <label for="numSupports">Number of Supports</label>
-          <input type="number" id="numSupports" name="numSupports" step="1" min="1">
-        </div>
-        <div>
-          <label for="maxDistance">Max Distance Between Supports</label>
-          <input type="number" id="maxDistance" name="maxDistance" step="0.01">
-        </div>
-      </div>
-      <button type="submit">Calculate</button>
-    </form>
-  </section>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Slope Grade Calculator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Slope Grade Hieght Calculator</h1>
+        <section>
+            <form id="slopeForm">
+                <div class="form-grid">
+                    <div>
+                        <label for="slopePercent">Slope (%)</label>
+                        <input
+                            type="number"
+                            id="slopePercent"
+                            name="slopePercent"
+                            step="0.1"
+                            min="0.1"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="endingHeight">Ending Height</label>
+                        <input
+                            type="number"
+                            id="endingHeight"
+                            name="endingHeight"
+                            step="0.01"
+                            min="0.01"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="numSupports">Number of Supports</label>
+                        <input
+                            type="number"
+                            id="numSupports"
+                            name="numSupports"
+                            step="1"
+                            min="1"
+                        >
+                    </div>
+                    <div>
+                        <label for="maxDistance"
+                        >Max Distance Between Supports</label
+                        >
+                        <input
+                            type="number"
+                            id="maxDistance"
+                            name="maxDistance"
+                            step="0.01"
+                        >
+                    </div>
+                </div>
+                <button type="submit">Calculate</button>
+            </form>
+        </section>
 
-  <section>
-    <h2>Visualization</h2>
-    <canvas id="slopeCanvas" width="800" height="110"></canvas>
-  </section>
+        <section>
+            <h2>Visualization</h2>
+            <canvas
+                id="slopeCanvas"
+                width="800"
+                height="110"
+            ></canvas>
+        </section>
 
-  <section>
-    <h2>Results</h2>
-    <div id="results">
-      <div id="resultsGrid">
-        <div class="label">Slope Ending Height</div>
-        <div id="tableEndingHeight"></div>
-        <div class="label">Slope Length</div>
-        <div id="tableSlopeLength"></div>
-        <div class="label">Number of Supports</div>
-        <div id="tableNumSupports"></div>
-        <div class="label">Support Distance</div>
-        <div id="tableSupportDistance" class="tooltip"></div>
-      </div>
+        <section>
+            <h2>Results</h2>
+            <div id="results">
+                <div id="resultsGrid">
+                    <div class="label">Slope Ending Height</div>
+                    <div id="tableEndingHeight"></div>
+                    <div class="label">Slope Length</div>
+                    <div id="tableSlopeLength"></div>
+                    <div class="label">Number of Supports</div>
+                    <div id="tableNumSupports"></div>
+                    <div class="label">Support Distance</div>
+                    <div id="tableSupportDistance" class="tooltip"></div>
+                </div>
 
-      <h3>Supports</h3>
-      <table id="supportsTable">
-        <thead>
-          <tr>
-            <th>Support</th>
-            <th>Height</th>
-            <th>Distance from Start</th>
-          </tr>
-        </thead>
-        <tbody id="supportsBody">
-          <!-- Support rows will be added here dynamically -->
-        </tbody>
-    </div>
-  </section>
+                <h3>Supports</h3>
+                <table id="supportsTable">
+                    <thead>
+                        <tr>
+                            <th>Support</th>
+                            <th>Height</th>
+                            <th>Distance from Start</th>
+                        </tr>
+                    </thead>
+                    <tbody id="supportsBody">
+                        <!-- Support rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-  <script src="calc.js"></script>
-</body>
+        <script src="calc.js"></script>
+    </body>
 </html>

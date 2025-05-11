@@ -1,0 +1,29 @@
+{
+  "name": "slope-grade-calc",
+  "version": "1.0.0",
+  "description": "Calculates heights based on a slop and ending height, good for tressles",
+  "main": "calc.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.html,.css",
+    "lint:fix": "eslint . --ext .js,.html,.css --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mak001/sloped-trestle-height-calc.git"
+  },
+  "author": "mak001",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mak001/sloped-trestle-height-calc/issues"
+  },
+  "homepage": "https://github.com/mak001/sloped-trestle-height-calc#readme",
+  "devDependencies": {
+    "@eslint/css": "^0.7.0",
+    "@eslint/js": "^9.26.0",
+    "@html-eslint/eslint-plugin": "^0.40.3",
+    "@html-eslint/parser": "^0.40.0",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0"
+  }
+}
